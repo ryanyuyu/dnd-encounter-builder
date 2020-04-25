@@ -25,8 +25,29 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
-      env:
-        CI: true
-    - run: sh deploy.sh
+    - run: npm run build
+    - name: Deploy after the build finished
+      run: |
+        # abort on errors
+        set -e
+
+        # build
+        npm run build
+
+        # navigate into the build output directory
+        cd dist
+
+        # if you are deploying to a custom domain
+        echo 'https://ryanyuyu.github.io/dnd-encounter-builder/' > CNAME
+
+        git init
+        git add -A
+        git commit -m 'deploy'
+
+        # if you are deploying to https://<USERNAME>.github.io
+        # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
+
+        # if you are deploying to https://<USERNAME>.github.io/<REPO>
+        git push -f git@github.com:ryanyuyu.github.io/dnd-encounter-builder.git master:gh-pages
+
+        cd -
