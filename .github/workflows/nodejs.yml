@@ -44,9 +44,9 @@ jobs:
         git commit -m 'deploy'
 
         # if you are deploying to https://<USERNAME>.github.io
-        git push -f git@github.com:ryanyuyu/ryanyuyu.github.io.git master
+        # git push -f git@github.com:ryanyuyu/ryanyuyu.github.io.git master
 
         # if you are deploying to https://<USERNAME>.github.io/<REPO>
-        # git push -f git@github.com:ryanyuyu.github.io/dnd-encounter-builder.git master:gh-pages
+        git push -f git@github.com:ryanyuyu/dnd-encounter-builder.git master:gh-pages
 
         cd -
