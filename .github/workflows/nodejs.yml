@@ -39,6 +39,8 @@ jobs:
         # if you are deploying to a custom domain
         echo 'https://ryanyuyu.github.io/dnd-encounter-builder/' > CNAME
 
+        git config --global user.email "ryanyuyu42@gmail.com"
+        git config --global user.name "ryanyuyu"
         git init
         git add -A
         git commit -m 'deploy'
