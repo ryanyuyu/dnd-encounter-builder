@@ -5,10 +5,10 @@
             <div class="column enemy-section">
                 <h2>Enemies</h2>
 
-                <enemy-input-card v-for="(enemy, index) in enemyParty" 
-                    :key="index"
-                    :enemy.sync="enemy">
-                </enemy-input-card>
+                <div v-for="(enemy, index) in enemyParty" :key="index">
+                    <enemy-input-card :enemy.sync="enemy"> </enemy-input-card>
+                    {{enemy.getExperience}}
+                </div>
                 <button @click="addEnemy">Add Enemy Type</button>
 
                 <pre style="max-width: 200px; overflow: none; word-break: break-word; white-space:break-spaces">{{JSON.stringify(enemyParty)}} </pre>
@@ -27,14 +27,15 @@
 
 <script>
 import EnemyInputCard from "./components/EnemyInputCard.vue";
+import EnemyGroup from './models/EnemyGroup';
 
 export default {
     name: "App",
     data: function () {
         return {
             enemyParty: [
-                {name: "Goblin", cr: ".25", count: 3},
-                {name: "Bugbear", cr: "1", count: 1}
+                new EnemyGroup("Goblin", 3, "1/4"),
+                new EnemyGroup("Bugbear", 1, "1")
             ],
             playerParty: [],
             result: {
@@ -44,8 +45,11 @@ export default {
     },
     methods: {
         addEnemy() {
-            this.enemyParty.push({});
+            this.enemyParty.push(new EnemyGroup("", 0, ""));
         }
+    },
+    computed: {
+
     },
     components: {
         EnemyInputCard

@@ -25,9 +25,6 @@
 export default {
     name: 'EnemyInputCard',
     props: ['enemy'],
-    computed: {
-        
-    }
 }
 </script>
 
