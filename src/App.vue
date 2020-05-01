@@ -6,8 +6,8 @@
                 <h2>Enemies</h2>
 
                 <div v-for="(enemy, index) in enemyParty" :key="index">
-                    <enemy-input-card :enemy.sync="enemy"> </enemy-input-card>
-                    {{enemy.getExperience}}
+                    <enemy-input-card :enemy.sync="enemy"></enemy-input-card>
+                    <span class="calculated-xp">{{enemy.getExperience}} XP</span>
                 </div>
                 <button @click="addEnemy">Add Enemy Type</button>
 
@@ -15,6 +15,11 @@
             </div>
             <div class="column player-section">
                 <h2>Players</h2>
+                <div v-for="(player, index) in playerParty" :key="index">
+                    <player-input-card :player.sync="player"></player-input-card>
+                </div>
+                <button @click="addPlayer">Add more players</button>
+                <pre>{{JSON.stringify(playerParty)}}</pre>
             </div>
             <div class="column result-section">
                 <h2>Encounter Estimates</h2>
@@ -26,18 +31,22 @@
 </template>
 
 <script>
-import EnemyInputCard from "./components/EnemyInputCard.vue";
 import EnemyGroup from './models/EnemyGroup';
+import PlayerGroup from './models/PlayerGroup';
+import EnemyInputCard from "./components/EnemyInputCard.vue";
+import PlayerInputCard from "./components/PlayerInputCard.vue";
+
 
 export default {
     name: "App",
     data: function () {
         return {
             enemyParty: [
-                new EnemyGroup("Goblin", 3, "1/4"),
+                new EnemyGroup("Goblin", 2, "1/4"),
+                new EnemyGroup("Wolf", 2, "1/4"),
                 new EnemyGroup("Bugbear", 1, "1")
             ],
-            playerParty: [],
+            playerParty: [new PlayerGroup(4, 2)],
             result: {
                 difficulty: 'Default Difficulty'
             }
@@ -46,13 +55,17 @@ export default {
     methods: {
         addEnemy() {
             this.enemyParty.push(new EnemyGroup("", 0, ""));
+        }, 
+        addPlayer() {
+            this.playerParty.push(new PlayerGroup(0));
         }
     },
     computed: {
 
     },
     components: {
-        EnemyInputCard
+        EnemyInputCard,
+        PlayerInputCard
     }
 };
 </script>
@@ -84,6 +97,12 @@ $columnPadding: 10px;
     .enemy-section {
         max-width: $columnMaxWidth;
         border: 1px solid red;
+
+        .calculated-xp {
+            display: inline-block; 
+            padding: 5px; 
+            min-width: 5em;
+        }
     }
     .player-section {
         max-width: $columnMaxWidth;

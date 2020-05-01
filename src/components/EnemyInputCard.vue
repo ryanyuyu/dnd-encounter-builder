@@ -21,6 +21,7 @@
             Not necessary for current plans of the encounter estimate. -->
     </div>
 </template>
+
 <script>
 export default {
     name: 'EnemyInputCard',
@@ -44,7 +45,7 @@ $inputPadding: 5px;
 $cardSeparation: 5px;
 
 .enemy-input-card {
-    display: flex;
+    display: inline-block;
     background-color: $cardBackgroundColor;
     padding: 0;
     border-radius: $inputPadding;

@@ -1,4 +1,4 @@
-import { getXpFromCr } from '../conversions/xpTables';
+import { getXpFromCr } from '../dndConstants/xpConversion';
 
 /**
  * Class representing a group of same-type enemies.  For example, a group of 3 Goblins (CR 1/4)
