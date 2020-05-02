@@ -6,6 +6,7 @@
                 <h2>Enemies</h2>
 
                 <div v-for="(enemy, index) in enemyParty" :key="index">
+                    <span class="remove-icon" @click="removeEnemy(index)">X</span>
                     <enemy-input-card :enemy.sync="enemy"></enemy-input-card>
                     <span class="calculated-xp">{{enemy.experience}} XP</span>
                 </div>
@@ -14,6 +15,7 @@
             <div class="column player-section">
                 <h2>Players</h2>
                 <div v-for="(player, index) in playerParty" :key="index">
+                    <span class="remove-icon" @click="removePlayer(index)">X</span>
                     <player-input-card :player.sync="player"></player-input-card>
                 </div>
                 <button @click="addPlayer">Add more players</button>
@@ -22,12 +24,16 @@
                 <h2>Encounter Estimates</h2>
                 <div class="xp-calculations">
                     <div>
-                        <label>Total Relevant Enemies:</label>
+                        <label>Number of Enemies:</label>
                         {{ totalEnemies }}
                     </div>
                     <div>
-                        <label>Total Players:</label>
+                        <label>Number of Players:</label>
                         {{ totalPlayers }}
+                    </div>
+                    <div style="font-weight: bold;">
+                        <label>Xp Awarded:</label>
+                        {{ totalEnemyXp }}
                     </div>
                     <div>
                         <label>XP Multiplier:</label>
@@ -39,7 +45,7 @@
                     </div>
                 </div>
                 <div class="player-results">
-                    <div>
+                    <div style="font-weight: bold;">
                         <label>Difficulty Estimate:</label>
                         {{ difficultyEstimate }}
                     </div>
@@ -95,9 +101,15 @@ export default {
     methods: {
         addEnemy() {
             this.enemyParty.push(new EnemyGroup("", 0, ""));
-        }, 
+        },
+        removeEnemy(index) {
+            this.enemyParty.splice(index, 1);
+        },
         addPlayer() {
             this.playerParty.push(new PlayerGroup(0));
+        },
+        removePlayer(index) {
+            this.playerParty.splice(index, 1);
         }
     },
     computed: {
@@ -146,6 +158,7 @@ export default {
 <style lang="scss">
 $columnMaxWidth: 500px;
 $columnPadding: 10px;
+$resultColumnMinWidth: 200px;
 
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -161,6 +174,13 @@ $columnPadding: 10px;
 
     h2 {
         display: block;
+        text-align: center;
+    }
+
+    .remove-icon {
+        padding: 5px;
+        color:red;
+        font-weight: bold;
     }
 
     .column {
@@ -169,7 +189,6 @@ $columnPadding: 10px;
 
     .enemy-section {
         max-width: $columnMaxWidth;
-        border: 1px solid red;
 
         .calculated-xp {
             display: inline-block; 
@@ -179,12 +198,19 @@ $columnPadding: 10px;
     }
     .player-section {
         max-width: $columnMaxWidth;
-        border: 1px solid blue;
     }
 
     .result-section {
+        text-align: right;
+
         > div {
             display: inline-block;
+            min-width: $resultColumnMinWidth;
+            padding: $columnPadding
+        }
+
+        label {
+            float: left;
         }
     }
 }

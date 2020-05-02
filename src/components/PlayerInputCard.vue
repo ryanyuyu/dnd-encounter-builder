@@ -21,8 +21,15 @@ export default {
 
 <style lang="scss" scoped>
 .player-input-card {
+    display: inline-block;
+    padding: 5px;
+
     input{
         max-width: 10em;
+    }
+
+    +.player-input-card {
+        margin-top: 10px;
     }
 }
 </style>
