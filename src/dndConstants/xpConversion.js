@@ -61,7 +61,7 @@ export function getXpFromCr(cr) {
  * @returns {DifficultyThreshold} An object representing the threshold of difficulty for the given player-level.
  */
 export function getDifficultyThresholds(playerLevel) {
-    switch (playerLevel) {
+    switch (+playerLevel) {
         case 1: return new DifficultyThreshold(25, 50, 75, 100, 300);
         case 2: return new DifficultyThreshold(50, 100, 150, 200, 600);
         case 3: return new DifficultyThreshold(75, 150, 225, 400, 1200);
@@ -83,4 +83,5 @@ export function getDifficultyThresholds(playerLevel) {
         case 19: return new DifficultyThreshold(2400, 4900, 7300, 10900, 30000);
         case 20: return new DifficultyThreshold(2800, 5700, 8500, 12700, 40000);
     }
+    console.log("fell through");
 }

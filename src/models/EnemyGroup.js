@@ -18,7 +18,7 @@ export default class EnemyGroup {
         this.isRelevant = isRelevant;
     }
 
-    get getExperience() {
+    get experience() {
         return this.isRelevant 
             ? this.count * getXpFromCr(this.cr)
             : 0;

@@ -16,6 +16,10 @@ export default class DifficultyThreshold {
         return new DifficultyThreshold(sortedArray[0], sortedArray[1], sortedArray[2], sortedArray[3], sortedArray[4]);
     }
 
+    toArray() {
+        return [this.easy, this.medium, this.hard, this.deadly, this.dailyMax];
+    }
+
     /**
      * Takes an experience value and returns the proper difficulty label associated with the Threshold
      * @param {Number} xp 

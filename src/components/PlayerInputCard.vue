@@ -1,9 +1,9 @@
 <template>
     <div class="player-input-card">
-        Num players:
-        <input type="number" placeholder="" min="0" max="99"
-                v-model="player.count" 
-                @keyup="$emit('update:player.count', player.count)"/>
+        Name:
+        <input type="text" placeholder="name"
+                v-model="player.name" 
+                @keyup="$emit('update:player.name', player.name)"/>
         Level
         <select v-model="player.level"                
                 @change="$emit('update:player.level', player.count)">
@@ -22,7 +22,7 @@ export default {
 <style lang="scss" scoped>
 .player-input-card {
     input{
-        max-width: 2em;
+        max-width: 10em;
     }
 }
 </style>
